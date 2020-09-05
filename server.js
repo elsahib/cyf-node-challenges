@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const port = process.env.PORT || 3000
 const app = express();
+
 app.use(cors());
 app.use(express.urlencoded({ extended: false }))
 
@@ -11,21 +12,24 @@ const siteMap = {
     "/doctors": "returns doctors list for stratford",
     "/hospitals": "returns hospitals list for stratford"
 }
+const harrow = require("./data/Harrow.json")
+const stratford = require("./data/Stratford.json")
+const heathrow = require("./data/Heathrow.json")
 
 app.get("/", function (request, response) {
     response.json(siteMap);
 });
 app.get("/pharmacies", function (request, response) {
-    response.json(siteMap);
+    response.json(stratford.pharmacies);
 });
 app.get("/colleges", function (request, response) {
-    response.json(siteMap);
+    response.json(stratford.colleges);
 });
 app.get("/doctors", function (request, response) {
-    response.json(siteMap);
+    response.json(stratford.doctors);
 });
 app.get("/hospitals", function (request, response) {
-    response.json(siteMap);
+    response.json(stratford.hospitals);
 });
 
 app.listen(port);
